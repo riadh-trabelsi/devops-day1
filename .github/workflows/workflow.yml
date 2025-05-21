@@ -1,0 +1,50 @@
+name: Multi-language Docker CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build and run Lua
+        run: |
+          cd lua_script
+          docker build -t lua-hello .
+          docker run --rm lua-hello
+
+      - name: Build and run Go
+        run: |
+          cd golang_script
+          docker build -t go-hello .
+          docker run --rm go-hello
+
+      - name: Build and run PHP
+        run: |
+          cd php_script
+          docker build -t php-hello .
+          docker run --rm php-hello
+
+      - name: Build and run Java
+        run: |
+          cd java_script
+          docker build -t java-hello .
+          docker run --rm java-hello
+
+      - name: Build and run Python
+        run: |
+          cd python_script
+          docker build -t python-hello .
+          docker run --rm python-hello
+
+      - name: Build and run Bash
+        run: |
+          cd bash_script
+          docker build -t bash-hello .
+          docker run --rm bash-hello
+      
